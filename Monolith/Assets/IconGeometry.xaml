@@ -1,0 +1,15 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <DrawingImage x:Key="windowslogoDrawingImage">
+        <DrawingImage.Drawing>
+            <DrawingGroup ClipGeometry="M0,0 V452.986 H452.986 V0 H0 Z">
+                <DrawingGroup Opacity="1">
+                    <DrawingGroup Opacity="1">
+                        <GeometryDrawing Brush="White" Geometry="F1 M452.986,452.986z M0,0z M165.265,53.107L21.689,81.753 21.689,214.284 165.264,211.868 165.264,53.107 M431.297,245.583L198.117,241.592 198.117,406.414 431.297,452.985 431.297,245.583 M165.265,241.097L21.69,238.659 21.69,371.168 165.265,399.836 165.265,241.097 M431.297,0L198.117,46.528 198.117,211.35 431.297,207.381 431.297,0" />
+                    </DrawingGroup>
+                </DrawingGroup>
+            </DrawingGroup>
+        </DrawingImage.Drawing>
+    </DrawingImage>
+    
+</ResourceDictionary>
