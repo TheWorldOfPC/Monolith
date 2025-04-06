@@ -4,7 +4,7 @@
                  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                  xmlns:local="clr-namespace:Monolith"
-                 xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+                 xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml" WindowBackdropType="Mica" WindowCornerPreference="Round" ExtendsContentIntoTitleBar="True"
                  mc:Ignorable="d" WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
                  Title="MainWindow" Height="600" Width="900" Topmost="False">
     <Grid>
