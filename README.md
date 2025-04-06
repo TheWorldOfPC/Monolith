@@ -1,4 +1,4 @@
-## Compreshensive Windows Installation Tool
+## Comprehensive Windows Installation Tool
 
 ![alt text](https://github.com/TheWorldOfPC/Monolith/blob/main/Monolith/Assets/image.png?raw=true)
 
