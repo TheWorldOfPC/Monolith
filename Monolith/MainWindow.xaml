@@ -6,7 +6,7 @@
                  xmlns:local="clr-namespace:Monolith"
                  xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
                  mc:Ignorable="d" WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
-                 Title="MainWindow" Height="540" Width="800" Topmost="False">
+                 Title="MainWindow" Height="600" Width="900" Topmost="False">
     <Grid>
         <Grid>
 
@@ -27,7 +27,7 @@
                 </Grid>
             </Border>
 
-            <Grid x:Name="pageHome" Grid.Row="1" Margin="30,0,0,0" Visibility="Hidden">
+            <Grid x:Name="pageHome" Grid.Row="1" Margin="30,0,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />
@@ -47,8 +47,8 @@
                         <Image Source="{DynamicResource windowslogoDrawingImage}" Height="28" Width="28" Margin="0,0,10,0" />
 
                         <StackPanel Grid.Column="1" Margin="5">
-                            <ui:TextBlock FontTypography="BodyStrong" Text="Current OS:" Foreground="{ui:ThemeResource TextFillColorPrimaryBrush}" />
-                            <ui:TextBlock FontTypography="Caption" Text="Windows 10 LTSC (19045.4376)" Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}" />
+                            <ui:TextBlock FontTypography="BodyStrong" Text="Current OS:" />
+                            <ui:TextBlock x:Name="txtBlockCurrentEntry" FontTypography="Caption" Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}" />
                         </StackPanel>
                     </Grid>
                 </Border>
@@ -60,11 +60,11 @@
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
 
-                        <ui:SymbolIcon Symbol="SlideSettings24" FontSize="30" Foreground="{ui:ThemeResource TextFillColorPrimaryBrush}" VerticalAlignment="Center" Margin="0,0,10,0" />
+                        <ui:SymbolIcon Symbol="SlideSettings24" FontSize="30" VerticalAlignment="Center" Margin="0,0,10,0" />
 
                         <StackPanel Grid.Column="1" Margin="5">
-                            <ui:TextBlock FontTypography="BodyStrong" Text="Metro Bootloader:" Foreground="{ui:ThemeResource TextFillColorPrimaryBrush}" />
-                            <ui:TextBlock FontTypography="Caption" Text="Enabled" Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}" />
+                            <ui:TextBlock FontTypography="BodyStrong" Text="Metro Bootloader:" />
+                            <ui:TextBlock x:Name="txtBlockMetroBootloader" FontTypography="Caption" Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}" />
                         </StackPanel>
                     </Grid>
                 </Border>
@@ -76,11 +76,11 @@
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
 
-                        <ui:SymbolIcon Symbol="Power28" FontSize="30" Foreground="{ui:ThemeResource TextFillColorPrimaryBrush}" VerticalAlignment="Center" Margin="0,0,10,0" />
+                        <ui:SymbolIcon Symbol="Power28" FontSize="30" VerticalAlignment="Center" Margin="0,0,10,0" />
 
                         <StackPanel Grid.Column="1" Margin="5">
-                            <ui:TextBlock FontTypography="BodyStrong" Text="Bootloader Path:" Foreground="{ui:ThemeResource TextFillColorPrimaryBrush}" />
-                            <ui:TextBlock FontTypography="Caption" Text="C:\Windows\system32\winload.efi" Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}" />
+                            <ui:TextBlock FontTypography="BodyStrong" Text="Bootloader Path:" />
+                            <ui:TextBlock x:Name="txtBlockBootloaderLocation" FontTypography="Caption" Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}" />
                         </StackPanel>
                     </Grid>
                 </Border>
@@ -92,11 +92,11 @@
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
 
-                        <ui:SymbolIcon Symbol="Timer28" FontSize="30" Foreground="{ui:ThemeResource TextFillColorPrimaryBrush}" VerticalAlignment="Center" Margin="0,0,10,0" />
+                        <ui:SymbolIcon Symbol="Timer28" FontSize="30" VerticalAlignment="Center" Margin="0,0,10,0" />
 
                         <StackPanel Grid.Column="1" Margin="5">
-                            <ui:TextBlock FontTypography="BodyStrong" Text="Bootloader Count Down Time:" Foreground="{ui:ThemeResource TextFillColorPrimaryBrush}" />
-                            <ui:TextBlock FontTypography="Caption" Text="30 Seconds" Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}" />
+                            <ui:TextBlock FontTypography="BodyStrong" Text="Bootloader Count Down Time:" />
+                            <ui:TextBlock x:Name="txtBlockBootloaderTimeout" FontTypography="Caption" Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}" />
                         </StackPanel>
                     </Grid>
                 </Border>
@@ -106,34 +106,223 @@
                 <ui:TextBlock FontTypography="Subtitle" Text="Select Image File"/>
 
                 <Grid>
-                    <Rectangle Cursor="Hand" StrokeDashArray="8.0 8.0" Stroke="DimGray" RadiusX="10" RadiusY="10" Height="110" Margin="0,0,20,0"/>
+                    <Rectangle Cursor="Hand" StrokeDashArray="8.0 8.0" Stroke="DimGray" RadiusX="10" RadiusY="10" Height="150" Margin="0,0,20,0"/>
                     <ui:TextBlock FontTypography="Body" Text="Drag and drop image file here (.iso, .esd, .wim, .swm) or click to browse." HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <Button x:Name="btnBrowseImage" Style="{DynamicResource BrowseBtn}" AllowDrop="True" Drop="btnBrowseImage_Drop" Click="btnBrowseImage_Click" Cursor="Hand" HorizontalAlignment="Center" VerticalAlignment="Center" Height="110" Width="750" Margin="0,0,20,0">
+                    <Button x:Name="btnBrowseImage" Style="{DynamicResource BrowseBtn}" AllowDrop="True" Drop="btnBrowseImage_Drop" Click="btnBrowseImage_Click" Cursor="Hand" HorizontalAlignment="Center" VerticalAlignment="Center" Height="150" Width="950" Margin="0,0,20,0">
                         <Button.Background>
                             <SolidColorBrush Color="#D0D1ED" Opacity="0.08" />
                         </Button.Background>
                     </Button>
                 </Grid>
 
+                <ProgressBar x:Name="progressBarISO" VerticalAlignment="Bottom" IsIndeterminate="True" Margin="0,0,20,20" Visibility="Collapsed"/>
+                <ui:TextBlock x:Name="txtBlockISO" FontTypography="Caption" Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Bottom" Visibility="Collapsed" Margin="3,0,0,-10" />
+
             </Grid>
 
-            <Grid x:Name="pageInstallParameters" Grid.Row="1" Margin="30,0,0,0">
+            <ScrollViewer x:Name="pageInstallConfiguration" Grid.Row="1" Visibility="Collapsed">
+                <UniformGrid Columns="1" Rows="7" Margin="20,0,20,0">
 
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                
-                <ui:TextBlock FontTypography="Subtitle" Text="Installation Parameters"/>
+                    <Border Background="{ui:ThemeResource CardBackgroundFillColorDefaultBrush}" BorderBrush="{ui:ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Height="80" CornerRadius="8" Margin="0,0,0,5">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
 
-                <TextBox Grid.Row="2" IsReadOnly="True" />
-                
-            </Grid>
+                            <Image Source="{DynamicResource windowslogoDrawingImage}" Height="28" Width="28" Margin="20,0,10,0" />
 
-            <ui:Button x:Name="btnStartInstall" Content="Start Installation" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="150" Margin="0,0,20,20" />
-            <ui:Button x:Name="btnNext" Content="Next" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="150" Margin="0,0,20,20" Visibility="Collapsed" />
+                            <StackPanel Grid.Column="1" Margin="10,20,0,0">
+                                <ui:TextBlock FontTypography="BodyStrong" Text="Installation Path" />
+                                <ui:TextBlock FontTypography="Caption" Text="Choose the Windows installation path." Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}" />
+                            </StackPanel>
+
+                            <ComboBox x:Name="cmBoxPartitions" SelectionChanged="cmBoxPartitions_SelectionChanged" Grid.Column="2" Width="150" Margin="0,0,10,0" />
+                            <Button x:Name="btnRefreshDrives" Grid.Column="3" Height="38" Width="38" Click="btnRefreshDrives_Click" Margin="0,0,20,0">
+                                <ui:SymbolIcon Symbol="ArrowSync24" />
+                            </Button>
+
+                        </Grid>
+                    </Border>
+
+                    <Border Background="{ui:ThemeResource CardBackgroundFillColorDefaultBrush}" BorderBrush="{ui:ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Height="80" CornerRadius="8" Margin="0,0,0,5">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <ui:SymbolIcon Symbol="Library28" FontSize="30" VerticalAlignment="Center" Margin="20,0,10,0" />
+
+                            <StackPanel Grid.Column="1" Margin="10,20,0,0">
+                                <ui:TextBlock FontTypography="BodyStrong" Text="Select Edition" />
+                                <ui:TextBlock FontTypography="Caption" Text="Choose the Windows Edition to install." Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}" />
+                            </StackPanel>
+
+                            <ComboBox x:Name="cmBoxIndexes" SelectedIndex="0" Grid.Column="2" Width="300" Margin="0,0,10,0" />
+
+                        </Grid>
+                    </Border>
+
+                    <Border Background="{ui:ThemeResource CardBackgroundFillColorDefaultBrush}" BorderBrush="{ui:ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Height="80" CornerRadius="8" Margin="0,0,0,5">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <ui:SymbolIcon Symbol="Document48" FontSize="30" VerticalAlignment="Center" Margin="20,0,10,0" />
+
+                            <StackPanel Grid.Column="1" Margin="10,20,0,0">
+                                <ui:TextBlock FontTypography="BodyStrong" Text="Auto Unattend" />
+                                <ui:TextBlock x:Name="txtBlockUnattendXml" FontTypography="Caption" Text="Answer file to perform unattended installation of Windows." Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}" />
+                            </StackPanel>
+
+                            <ui:ToggleSwitch x:Name="tsAutoUnattendXml" Grid.Column="2" VerticalAlignment="Center" OffContent="Disabled" OnContent="Enabled" Click="tsAutoUnattendXml_Click" Margin="0,0,20,0"/>
+
+                        </Grid>
+                    </Border>
+
+                    <Border Background="{ui:ThemeResource CardBackgroundFillColorDefaultBrush}" BorderBrush="{ui:ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Height="80" CornerRadius="8" Margin="0,0,0,5">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <ui:SymbolIcon Symbol="Timer24" FontSize="30" VerticalAlignment="Center" Margin="20,0,10,0" />
+
+                            <StackPanel Grid.Column="1" Margin="10,20,0,0">
+                                <ui:TextBlock FontTypography="BodyStrong" Text="Bootloader Count Down Time" />
+                                <ui:TextBlock FontTypography="Caption" Text="Displays a menu with a countdown timer before automatically booting the default operating system." Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}" />
+                            </StackPanel>
+
+                            <ui:NumberBox x:Name="numBoxTimeout" Grid.Column="2" Minimum="5" Value="30" Margin="0,0,20,0" />
+
+                        </Grid>
+                    </Border>
+
+                    <Border Background="{ui:ThemeResource CardBackgroundFillColorDefaultBrush}" BorderBrush="{ui:ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Height="80" CornerRadius="8" Margin="0,0,0,5">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <ui:SymbolIcon Symbol="Box24" FontSize="30" VerticalAlignment="Center" Margin="20,0,10,0" />
+
+                            <StackPanel Grid.Column="1" Margin="10,20,0,0">
+                                <ui:TextBlock FontTypography="BodyStrong" Text="CompactOS" />
+                                <ui:TextBlock FontTypography="Caption" Text="Compact OS compresses OS files and some select set of program files, highly optimized for exes and read-only binary files." Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}" />
+                            </StackPanel>
+
+                            <ui:ToggleSwitch x:Name="tsCompactOS" Grid.Column="2" VerticalAlignment="Center" OffContent="Disabled" OnContent="Enabled" Margin="10,0,20,0"/>
+
+                        </Grid>
+                    </Border>
+
+                    <Border Background="{ui:ThemeResource CardBackgroundFillColorDefaultBrush}" BorderBrush="{ui:ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Height="80" CornerRadius="8" Margin="0,0,0,5">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <ui:SymbolIcon Symbol="DesktopCheckmark24" FontSize="30" VerticalAlignment="Center" Margin="20,0,10,0" />
+
+                            <StackPanel Grid.Column="1" Margin="10,20,0,0">
+                                <ui:TextBlock FontTypography="BodyStrong" Text="Mark as Default OS" />
+                                <ui:TextBlock FontTypography="Caption" Text="Marks the installation as default in the bootloader." Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}" />
+                            </StackPanel>
+
+                            <ui:ToggleSwitch x:Name="tsDefaultOS" Grid.Column="2" VerticalAlignment="Center" OffContent="Disabled" OnContent="Enabled" Margin="0,0,20,0"/>
+
+                        </Grid>
+                    </Border>
+
+                    <Border Background="{ui:ThemeResource CardBackgroundFillColorDefaultBrush}" BorderBrush="{ui:ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Height="80" CornerRadius="8" Margin="0,0,0,5">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <ui:SymbolIcon Symbol="HandDraw28" FontSize="30" VerticalAlignment="Center" Margin="20,0,10,0" />
+
+                            <StackPanel Grid.Column="1" Margin="10,20,0,0">
+                                <ui:TextBlock FontTypography="BodyStrong" Text="Metro Bootloader" />
+                                <ui:TextBlock FontTypography="Caption" Text="Modern/Metro UI for the Windows Bootloader." Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}" />
+                            </StackPanel>
+
+                            <ui:ToggleSwitch x:Name="tsMetroBootloader" Grid.Column="2" VerticalAlignment="Center" OffContent="Disabled" OnContent="Enabled" Margin="0,0,20,0"/>
+
+                        </Grid>
+                    </Border>
+
+                </UniformGrid>
+            </ScrollViewer>
+
+            <Border x:Name="pageInstallation" CornerRadius="8" Grid.Row="1" Margin="20,0,20,0" Background="{ui:ThemeResource CardBackgroundFillColorDefaultBrush}" BorderBrush="{ui:ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Visibility="Collapsed">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Orientation="Horizontal">
+                        <ui:SymbolIcon x:Name="iconCancelled" Symbol="DismissCircle32" FontSize="24" Margin="20,20,0,10" Visibility="Collapsed" />
+                        <Image x:Name="iconWindows" Source="{DynamicResource windowslogoDrawingImage}" Height="24" Width="24" Margin="20,20,0,10" />
+                        <ui:TextBlock x:Name="txtBlockInstallInProg" FontTypography="Subtitle" Text="Installation in progress" Margin="20,20,0,10"/>
+                    </StackPanel>
+
+                    <StackPanel x:Name="installationStatus" Grid.Row="1" Margin="50,10,0,0">
+                        <StackPanel Orientation="Horizontal">
+                            <ui:ProgressRing IsIndeterminate="True" Height="20" Width="20" Margin="17,0,0,0" />
+                            <ui:TextBlock FontTypography="BodyStrong" Text="Installing Windows" Margin="10" VerticalAlignment="Center" />
+                            <ui:TextBlock x:Name="txtBlockInstallPercent" FontTypography="BodyStrong" VerticalAlignment="Center" />
+                        </StackPanel>
+                        <ui:TextBlock x:Name="txtBlockInstallStatus" FontTypography="Caption" TextWrapping="WrapWithOverflow" TextTrimming="WordEllipsis" Margin="47,0,0,0" Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}" />
+                    </StackPanel>
+
+                    <TreeView AllowDrop="True" Grid.Column="1" IsEnabled="False" Grid.RowSpan="2" Margin="0,10,20,0">
+                        <TreeViewItem IsExpanded="True">
+                            <TreeViewItem.Header>
+                                <StackPanel Orientation="Horizontal">
+                                    <ui:SymbolIcon Symbol="TaskListRtl24" FontSize="30"/>
+                                    <ui:TextBlock FontTypography="Subtitle" Text="Additional Tasks" Margin="20,0,0,0"/>
+                                </StackPanel>
+                            </TreeViewItem.Header>
+                            <TreeViewItem x:Name="taskUnattend" Header="Apply Auto Unattend" Margin="35,0,0,0" Visibility="Collapsed"/>
+                            <TreeViewItem x:Name="taskCompactOS" Header="Enable CompactOS" Margin="35,0,0,0" Visibility="Collapsed"/>
+                            <TreeViewItem x:Name="taskMetroBootloader" Header="Disable Metro Bootloader" Margin="35,0,0,0"/>
+                            <TreeViewItem x:Name="taskDefaultOS" Header="Set as Default OS" Visibility="Collapsed" Margin="35,0,0,0"/>
+                            <TreeViewItem x:Name="taskBootloaderTimeout" Header="Set Bootloader Count Down Time" Margin="35,0,0,0"/>
+                        </TreeViewItem>
+                    </TreeView>
+
+                </Grid>
+            </Border>
+
+            <ui:InfoBar x:Name="SetupInfoBar" Grid.Row="2" Margin="20,10,0,20" Width="680" HorizontalAlignment="Left" VerticalAlignment="Center" IsOpen="False" IsClosable="False" />
+            <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                <ui:Button x:Name="btnCancel" Content="Cancel" Width="120" Margin="20" Click="btnCancel_Click" Visibility="Collapsed"/>
+                <ui:Button x:Name="btnBack" Content="Back" Width="120" Margin="20,20,20,20" Click="btnBack_Click" Visibility="Collapsed"/>
+                <ui:Button x:Name="btnNext" Content="Next" Width="120" Margin="0,20,20,20" Click="btnNext_Click" />
+            </StackPanel>
 
         </Grid>
 
@@ -142,6 +331,6 @@
                 <ui:ImageIcon Source="pack://application:,,,/Assets/icon.png" />
             </ui:TitleBar.Icon>
         </ui:TitleBar>
-        <ui:SnackbarPresenter x:Name="SnackbarHost"  />
+        <ui:SnackbarPresenter x:Name="SnackbarHost" />
     </Grid>
 </ui:FluentWindow>
