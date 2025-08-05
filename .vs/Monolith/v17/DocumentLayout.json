@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\Administrator\\source\\repos\\Monolith\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{6DE551F2-4DB5-49B0-AB4F-89AE7FD10731}|Monolith\\Monolith.csproj|c:\\users\\administrator\\source\\repos\\monolith\\monolith\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{6DE551F2-4DB5-49B0-AB4F-89AE7FD10731}|Monolith\\Monolith.csproj|solutionrelative:monolith\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{6DE551F2-4DB5-49B0-AB4F-89AE7FD10731}|Monolith\\Monolith.csproj|c:\\users\\administrator\\source\\repos\\monolith\\monolith\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6DE551F2-4DB5-49B0-AB4F-89AE7FD10731}|Monolith\\Monolith.csproj|solutionrelative:monolith\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
@@ -23,12 +27,24 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\Administrator\\source\\repos\\Monolith\\Monolith\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "Monolith\\MainWindow.xaml",
+              "ToolTip": "C:\\Users\\Administrator\\source\\repos\\Monolith\\Monolith\\MainWindow.xaml",
+              "RelativeToolTip": "Monolith\\MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-08-05T05:18:23.923Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "MainWindow.xaml.cs",
               "DocumentMoniker": "C:\\Users\\Administrator\\source\\repos\\Monolith\\Monolith\\MainWindow.xaml.cs",
               "RelativeDocumentMoniker": "Monolith\\MainWindow.xaml.cs",
               "ToolTip": "C:\\Users\\Administrator\\source\\repos\\Monolith\\Monolith\\MainWindow.xaml.cs",
               "RelativeToolTip": "Monolith\\MainWindow.xaml.cs",
-              "ViewState": "AQIAAJABAAAAAAAAAAAmwKMBAAA3AAAA",
+              "ViewState": "AQIAAJ0BAAAAAAAAAAAmwL8BAAA6AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-05T03:16:37.339Z",
               "EditorCaption": ""

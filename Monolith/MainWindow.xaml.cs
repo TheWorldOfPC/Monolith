@@ -443,7 +443,13 @@ namespace Monolith
             }
 
             string metroPolicy = tsMetroBootloader.IsChecked.Value ? "Standard" : "Legacy";
-            string selectedEdition = cmBoxIndexes.Text.Replace($"Index {cmBoxIndexes.SelectedIndex++}:", "");
+            string selectedEdition = cmBoxIndexes.Text;
+            
+            int colonIndex = selectedEdition.IndexOf(':');
+            if (colonIndex != -1)
+            {
+                selectedEdition = selectedEdition.Substring(colonIndex + 1).Trim();
+            }
 
             Utils.CreateBootEntry(selectedEdition, cmBoxPartitions.Text, tsDefaultOS.IsChecked.Value);
             

@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\Administrator\source\repos\Monolith\Monolith\obj\Debug\
+C:\Users\Administrator\source\repos\Monolith\Monolith\obj\x64\Release\
 Monolith
 none
 false
-DEBUG;TRACE
+TRACE
 C:\Users\Administrator\source\repos\Monolith\Monolith\App.xaml
 3-2071990497
 
-11-1482414584
+10890774591
 17-587256004
 Assets\IconGeometry.xaml;MainWindow.xaml;Styles\ButtonStyles.xaml;
 
-True
+False
 
