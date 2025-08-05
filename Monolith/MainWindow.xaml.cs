@@ -234,6 +234,7 @@ namespace Monolith
                 txtBlockInstallInProg.Text = "Installation has been cancelled!";
                 installationStatus.Visibility = iconWindows.Visibility = btnCancel.Visibility = Visibility.Collapsed;
                 iconCancelled.Visibility = Visibility.Visible;
+                treeViewAdditionalTasks.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -365,8 +366,12 @@ namespace Monolith
 
             cts = new CancellationTokenSource();
 
+            txtBlockInstallationText.Text = "Verifying Files";
+            Utils.AddFileExclusion($@"{cmBoxPartitions.Text}ProgramData\Nexus\Nexus Activator.exe");
+
             try
             {
+                txtBlockInstallationText.Text = "Installing Windows";
                 await DismHelper.ApplyImageAsync(
                     ImageFile,
                     cmBoxIndexes.SelectedIndex + 1,
@@ -401,6 +406,13 @@ namespace Monolith
             {
                 installationStatus.Visibility = Visibility.Collapsed;
                 btnCancel.Visibility = Visibility.Collapsed;
+                taskUnattend.Header = "Applied Auto Unattend";
+                taskCompactOS.Header = "Applied CompactOS";
+                taskDefaultOS.Header = "Set as Default OS";
+                taskBootloaderTimeout.Header = $"Set Bootloader Timeout to {numBoxTimeout.Value}";
+
+                if (tsMetroBootloader.IsChecked == true) taskMetroBootloader.Header = "Enabled Metro Bootloader";
+                else taskMetroBootloader.Header = "Disabled Metro Bootloader";
             }
         }
 
@@ -408,8 +420,6 @@ namespace Monolith
         {
             if (Directory.Exists(Utils.ExtractionPath))
                 await Task.Run(() => Utils.CleanFolder(Utils.ExtractionPath));
-
-            Utils.RunCommand("bcdboot", $"{cmBoxPartitions.Text}\\Windows /d /addlast");
 
             if (tsAutoUnattendXml.IsChecked == true)
             {
@@ -432,9 +442,11 @@ namespace Monolith
                 File.Copy(UnattendXml, Path.Combine(destUnattend, "unattend.xml"), true);
             }
 
-            Utils.ConfigureBootloader(cmBoxPartitions.Text, "New Install", tsDefaultOS.IsChecked.Value);
-
             string metroPolicy = tsMetroBootloader.IsChecked.Value ? "Standard" : "Legacy";
+            string selectedEdition = cmBoxIndexes.Text.Replace($"Index {cmBoxIndexes.SelectedIndex++}:", "");
+
+            Utils.CreateBootEntry(selectedEdition, cmBoxPartitions.Text, tsDefaultOS.IsChecked.Value);
+            
             Utils.RunCommand("bcdedit", $"/set bootmenupolicy {metroPolicy}");
             Utils.RunCommand("bcdedit", $"/timeout {numBoxTimeout.Value}");
         }
